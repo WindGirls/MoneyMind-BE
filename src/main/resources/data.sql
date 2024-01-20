@@ -3,4 +3,4 @@ insert into User values (2,'kong',25,'HomeProtector',123412341234);
 
 insert into ChatRoom values (1,1,2);
 
-insert into Message(MessageId,ChatRoomId,Content,UserId) values (1,1,'안녕',1);
+insert into Message(Message_id,ChatRoom_id,Content,User_id) values (1,1,'안녕',1);
