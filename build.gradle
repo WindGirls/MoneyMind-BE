@@ -1,14 +1,14 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.7'
-	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'WindGirls'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '11'
 }
 
 configurations {
@@ -22,15 +22,17 @@ repositories {
 }
 
 dependencies {
-	//spring boot
+	// spring boot
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	//lombok
+	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	//test junit5
+	// test junit5
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// mysql
@@ -38,10 +40,16 @@ dependencies {
 
 	// apache
 	implementation 'org.apache.commons:commons-lang3'
-}
 
-tasks.named('bootBuildImage') {
-	builder = 'paketobuildpacks/builder-jammy-base:latest'
+	// jwt
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+	//spring security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+
 }
 
 tasks.named('test') {

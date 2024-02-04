@@ -1,15 +1,26 @@
+drop table if exists account;
 drop table if exists message;
 drop table if exists chat_room;
 drop table if exists chatroom;
-drop table if exists account;
+drop table if exists authority;
 drop table if exists user;
 
 CREATE TABLE user (
-                      user_id	bigint(20)   not null auto_increment primary key,
-                      Name	varchar(20) not null,
-                      Age	bigint(20)   not null,
-                      Job	varchar(50) not null,
-                      Token	bigint(128) null
+	user_id	bigint(20)  auto_increment primary key,
+	account varchar(20) not null,
+	password	varchar(50) not null,
+	name	varchar(20) not null,
+	email	varchar(50) not null,
+	Age	bigint(20)    null,
+	Job	varchar(50)  null,
+	Token	bigint(128) null
+);
+
+CREATE TABLE authority (
+    authority_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    authority_name VARCHAR(255),
+    user_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
 CREATE TABLE chatroom (
