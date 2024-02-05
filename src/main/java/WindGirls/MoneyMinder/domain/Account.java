@@ -1,10 +1,9 @@
 package WindGirls.MoneyMinder.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Getter
