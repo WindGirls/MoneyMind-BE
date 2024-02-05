@@ -30,15 +30,6 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;       // 이메일
 
-    @Column(nullable = false)
-    private Long age; //유저나이
-
-    @Column(length = 50, nullable = false)
-    private String job; //유저직업
-
-    @Column(nullable = false)
-    private Long token; //토큰
-
     @OneToMany(mappedBy = "user1")
     private List<ChatRoom> chatRooms1 = new ArrayList<>();
 
@@ -48,13 +39,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Message> messages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Builder.Default
     private List<Authority> roles = new ArrayList<>();
 
     public void setRoles(List<Authority> role) {
         this.roles = role;
-        role.forEach(o -> o.setMember(this));
+        role.forEach(o -> o.setUser(this));
     }
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatRoom_id")
+    @Column(name = "chat_room_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

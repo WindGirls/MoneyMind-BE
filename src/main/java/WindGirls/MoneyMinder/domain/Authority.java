@@ -17,18 +17,19 @@ public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     @Column(name = "authority_id")
+    @JsonIgnore
     private Long id;
 
+    @Column(name = "authority_name")
     private String name;
 
-    @JoinColumn(name = "user")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private User user;
 
-    public void setMember(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

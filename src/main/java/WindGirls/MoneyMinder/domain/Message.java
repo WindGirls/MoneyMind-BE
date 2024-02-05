@@ -20,7 +20,7 @@ public class Message {
     private String content;
 
     @Column
-    private LocalDateTime sendTime;
+    private LocalDateTime send_time;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
