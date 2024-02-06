@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,21 +20,21 @@ public class Message {
     private String content;
 
     @Column
-    private LocalDateTime sendTime;
+    private LocalDateTime send_time;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "chatRoom_id")
-    private ChatRoom chatRoom;
+    @JoinColumn(name = "chat_Room_id")
+    private ChatRoom chat_Room;
 
     public void setUser(User user) {
         this.user = user;
     }
 
     public void setChatRoom(ChatRoom chatRoom) {
-        this.chatRoom = chatRoom;
+        this.chat_Room = chatRoom;
     }
 }

@@ -10,10 +10,11 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "chat_room")
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatRoom_id")
+    @Column(name = "chatroom_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,7 +25,7 @@ public class ChatRoom {
     @JoinColumn(name = "user2_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private User user2;
 
-    @OneToMany(mappedBy = "chatRoom")
+    @OneToMany(mappedBy = "chat_Room")
     private List<Message> messages = new ArrayList<>();
 
     public void setUser1(User user1) {

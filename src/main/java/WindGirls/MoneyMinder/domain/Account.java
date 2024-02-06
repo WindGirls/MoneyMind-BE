@@ -6,10 +6,13 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "account")
 public class Account {
 
     @Id
@@ -28,17 +31,18 @@ public class Account {
     @Column(name = "withdrawal", nullable = false)
     private int withdrawal;
 
-    @Column(name = "times", nullable = false)
-    private Timestamp times;
-
-    @Column(name = "balance", nullable = false)
-    private int balance;
 
     @Column(name = "place", nullable = false)
     private int place;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @Column(name = "times", nullable = false)
+    private Date times;
+
+
+    @Column(name = "balance", nullable = false)
+    private int balance;
+
+
+
 
 }
