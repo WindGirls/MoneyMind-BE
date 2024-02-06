@@ -2,14 +2,15 @@ package WindGirls.MoneyMinder.domain;
 
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +24,19 @@ public class Message {
     private LocalDateTime send_time;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "sender_id", referencedColumnName = "user_id")
+    private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "chatRoom_id")
+    @JoinColumn(name = "receiver_id", referencedColumnName = "user_id")
+    private User receiver;
+
+    @ManyToOne
+    @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(User sender) {
+        this.sender = sender;
     }
 
     public void setChatRoom(ChatRoom chatRoom) {

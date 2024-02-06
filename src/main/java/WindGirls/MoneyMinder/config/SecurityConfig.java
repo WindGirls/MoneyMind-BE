@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/", "/**").permitAll()
+                .requestMatchers("/ws","/ws/**").permitAll()
                 .requestMatchers("/register", "/login").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/user/**").hasRole("USER")

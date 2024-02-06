@@ -22,11 +22,11 @@ CREATE TABLE authority (
 
 CREATE TABLE chat_room (
                           chat_room_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                          user1_id BIGINT NOT NULL,
-                          user2_id BIGINT NOT NULL,
-                          FOREIGN KEY (user1_id) REFERENCES user(user_id),
-                          FOREIGN KEY (user2_id) REFERENCES user(user_id),
-                          CHECK (user1_id <> user2_id)
+                          sender_id BIGINT NOT NULL,
+                          receiver_id BIGINT NOT NULL,
+                          FOREIGN KEY (sender_id) REFERENCES user(user_id),
+                          FOREIGN KEY (receiver_id) REFERENCES user(user_id),
+                          CHECK (sender_id <> receiver_id)
 );
 
 CREATE TABLE message (
@@ -34,9 +34,12 @@ CREATE TABLE message (
                          chat_room_id	BIGINT not null,
                          Content	VARCHAR(255)   not null,
                          send_time	timestamp	NULL,
-                         user_id	bigint(20)   not null,
+                         sender_id BIGINT NOT NULL,
+                         receiver_id BIGINT NOT NULL,
                          foreign key (chat_room_id) references chat_room(chat_room_id),
-                         foreign key (user_id) references user(user_id)
+                         FOREIGN KEY (sender_id) REFERENCES user(user_id),
+                         FOREIGN KEY (receiver_id) REFERENCES user(user_id),
+                         CHECK (sender_id <> receiver_id)
 );
 
 CREATE TABLE account (
