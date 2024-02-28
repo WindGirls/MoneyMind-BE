@@ -1,4 +1,5 @@
 drop table if exists account;
+drop table if exists category;
 drop table if exists message;
 drop table if exists chat_room;
 drop table if exists chatroom;
@@ -42,6 +43,11 @@ CREATE TABLE message (
                          CHECK (sender_id <> receiver_id)
 );
 
+CREATE TABLE category (
+                              CATEGORY_ID   bigint(20)   NOT NULL primary key,
+                              NAME   VARCHAR(255)   NULL
+);
+
 CREATE TABLE account (
                          transaction_id INT AUTO_INCREMENT PRIMARY KEY,
                          user_id BIGINT NOT NULL,
@@ -49,6 +55,7 @@ CREATE TABLE account (
                          withdrawal INT NOT NULL,
                          times TIMESTAMP NOT NULL,
                          balance INT NOT NULL,
-                         place VARCHAR(20) NOT NULL,
-                         FOREIGN KEY (user_id) REFERENCES user(user_id)
+                         category_id   BIGINT(20)   NOT NULL,
+                         FOREIGN KEY (user_id) REFERENCES user(user_id),
+                         FOREIGN KEY(category_id) REFERENCES category(category_id)
 );

@@ -33,8 +33,9 @@ public class Account {
     @Column(name = "balance", nullable = false)
     private int balance;
 
-    @Column(name = "place", nullable = false)
-    private int place;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category; //카테고리 번호
 
     public void setUser(User user) {
         this.user = user;
