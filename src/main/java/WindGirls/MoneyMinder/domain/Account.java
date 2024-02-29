@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Getter
 @Entity
@@ -28,7 +29,7 @@ public class Account {
     private int withdrawal;
 
     @Column(name = "times", nullable = false)
-    private Timestamp times;
+    private Date times;
 
     @Column(name = "balance", nullable = false)
     private int balance;

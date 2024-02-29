@@ -53,7 +53,7 @@ CREATE TABLE account (
                          user_id BIGINT NOT NULL,
                          deposit INT NOT NULL,
                          withdrawal INT NOT NULL,
-                         times TIMESTAMP NOT NULL,
+                         times Date NOT NULL,
                          balance INT NOT NULL,
                          category_id   BIGINT(20)   NOT NULL,
                          FOREIGN KEY (user_id) REFERENCES user(user_id),
