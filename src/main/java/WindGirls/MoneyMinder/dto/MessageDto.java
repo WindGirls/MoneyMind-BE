@@ -8,20 +8,19 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class MessageDto {
     @Getter
     public static class Send {
         private String content;
-        private Long senderId;
-        private Long receiverId;
+        private Long userId;
         private Long chatRoomId;
 
         public Message toMessage() {
             return Message.builder()
                     .content(content)
-                    .sender(User.builder().id(senderId).build())
-                    .receiver(User.builder().id(receiverId).build())
+                    .user(User.builder().id(userId).build())
                     .chatRoom(ChatRoom.builder().id(chatRoomId).build())
                     .build();
         }
@@ -32,13 +31,13 @@ public class MessageDto {
     @Builder
     public static class Response {
         private String content;
-        private UserDto.Response sender;
-        private LocalDateTime sendTime;
+        private UserDto.Response user;
+        private Date sendTime;
 
         public static Response of(Message message) {
             return Response.builder()
                     .content(message.getContent())
-                    .sender(UserDto.Response.of(message.getSender()))
+                    .user(UserDto.Response.of(message.getUser()))
                     .sendTime(message.getSend_time())
                     .build();
         }

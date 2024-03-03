@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
+@Setter
 @Entity
 @Builder
 @AllArgsConstructor
@@ -21,22 +23,19 @@ public class Message {
     private String content;
 
     @Column
-    private LocalDateTime send_time;
+    private Date send_time;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id", referencedColumnName = "user_id")
-    private User sender;
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "receiver_id", referencedColumnName = "user_id")
-    private User receiver;
 
     @ManyToOne
     @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
-    public void setUser(User sender) {
-        this.sender = sender;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setChatRoom(ChatRoom chatRoom) {

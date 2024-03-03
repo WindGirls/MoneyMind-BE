@@ -1,9 +1,7 @@
 insert into User values (1,'eunnning','1234','eunnning','eunnning@naver.com');
 insert into User values (2,'kong','1234','kong','kong@naver.com');
 
-insert into Chat_Room values (1,1,2);
-
-insert into Message(Message_id,chat_room_id,Content,sender_id,receiver_id) values (1,1,'안녕',1,2);
+insert into Chat_Room values (1);
 
 insert into category(category_id, name) values (1,'생활/편의시설');
 insert into category(category_id, name) values (2,'카페');
