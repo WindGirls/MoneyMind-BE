@@ -3,11 +3,12 @@ package WindGirls.MoneyMinder.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class Account {
@@ -34,9 +35,12 @@ public class Account {
     @Column(name = "balance", nullable = false)
     private int balance;
 
+
+    @Getter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category; //카테고리 번호
+
 
     public void setUser(User user) {
         this.user = user;

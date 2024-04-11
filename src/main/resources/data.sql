@@ -1,3 +1,4 @@
+
 insert into User values (1,'eunnning','1234','eunnning','eunnning@naver.com');
 insert into User values (2,'kong','1234','kong','kong@naver.com');
 
@@ -23,3 +24,9 @@ insert into financial_terms (term,definition) values ('국내총생산(GDP)', '�
 insert into financial_terms (term,definition) values ('기축통화', '언제,어디에서나 금융거래를 할 때\n사용할 수 있는 통화');
 insert into financial_terms (term,definition) values ('윔블던효과', '국내 금융시장에서 외국계 자본이 침투해\n국내 금융기관을 밀어내는 현상');
 
+INSERT INTO chat_bot_message (id,content, user_id, c_times)
+VALUES
+    (1,'이번 달 사용한 금액은 얼마인가요?', 1, NOW()),
+    (2,'저번 달의 총 지출은 어떻게 되나요?', 1, NOW()),
+    (3,'내 통장 잔액을 알려주세요.', 2, NOW()),
+    (4,'어제의 소비 내역을 확인하고 싶어요.', 2, NOW());
