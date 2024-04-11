@@ -1,9 +1,12 @@
 drop table if exists account;
+drop table if exists category;
 drop table if exists message;
 drop table if exists chat_room;
-drop table if exists chatroom;
+# drop table if exists chatroom;
 drop table if exists authority;
+drop table if exists chat_bot_message;
 drop table if exists user;
+
 
 CREATE TABLE user (
                       user_id	bigint(20)  auto_increment primary key,
@@ -22,11 +25,11 @@ CREATE TABLE authority (
 
 CREATE TABLE chat_room (
                            chat_room_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           user1_id BIGINT NOT NULL,
-                           user2_id BIGINT NOT NULL,
-                           FOREIGN KEY (user1_id) REFERENCES user(user_id),
-                           FOREIGN KEY (user2_id) REFERENCES user(user_id),
-                           CHECK (user1_id <> user2_id)
+                           sender_id BIGINT NOT NULL,
+                           receiver_id BIGINT NOT NULL,
+                           FOREIGN KEY (sender_id) REFERENCES user(user_id),
+                           FOREIGN KEY (receiver_id) REFERENCES user(user_id),
+                           CHECK (sender_id <> receiver_id)
 );
 
 CREATE TABLE message (
@@ -34,9 +37,17 @@ CREATE TABLE message (
                          chat_room_id	BIGINT not null,
                          Content	VARCHAR(255)   not null,
                          send_time	timestamp	NULL,
-                         user_id	bigint(20)   not null,
+                         sender_id BIGINT NOT NULL,
+                         receiver_id BIGINT NOT NULL,
                          foreign key (chat_room_id) references chat_room(chat_room_id),
-                         foreign key (user_id) references user(user_id)
+                         FOREIGN KEY (sender_id) REFERENCES user(user_id),
+                         FOREIGN KEY (receiver_id) REFERENCES user(user_id),
+                         CHECK (sender_id <> receiver_id)
+);
+
+CREATE TABLE category (
+                          CATEGORY_ID   bigint(20)   NOT NULL primary key,
+                          NAME   VARCHAR(255)   NULL
 );
 
 CREATE TABLE account (
@@ -44,8 +55,18 @@ CREATE TABLE account (
                          user_id BIGINT NOT NULL,
                          deposit INT NOT NULL,
                          withdrawal INT NOT NULL,
-                         times DATE NOT NULL,
+                         times Date NOT NULL,
                          balance INT NOT NULL,
-                         place VARCHAR(20) NOT NULL,
-                         FOREIGN KEY (user_id) REFERENCES user(user_id)
+                         category_id   BIGINT(20)   NOT NULL,
+                         FOREIGN KEY (user_id) REFERENCES user(user_id),
+                         FOREIGN KEY(category_id) REFERENCES category(category_id)
 );
+
+CREATE TABLE chat_bot_message (
+                                  id INT AUTO_INCREMENT PRIMARY KEY,
+                                  content VARCHAR(255) NOT NULL,
+                                  user_id BIGINT NOT NULL,
+                                  c_times TIMESTAMP DEFAULT NULL,
+                                  FOREIGN KEY (user_id) REFERENCES user(user_id)
+);
+

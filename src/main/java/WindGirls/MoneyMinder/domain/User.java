@@ -30,14 +30,17 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;       // 이메일
 
-    @OneToMany(mappedBy = "user1")
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
     private List<ChatRoom> chatRooms1 = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user2")
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
     private List<ChatRoom> chatRooms2 = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Message> messages = new ArrayList<>();
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
+    private List<Message> messages1 = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    private List<Message> messages2 = new ArrayList<>();
 
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Builder.Default

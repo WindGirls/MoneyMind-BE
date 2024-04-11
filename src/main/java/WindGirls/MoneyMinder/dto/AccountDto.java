@@ -1,28 +1,53 @@
 package WindGirls.MoneyMinder.dto;
 
+import WindGirls.MoneyMinder.domain.Category;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
 public class AccountDto {
-    private Long id;
-    private int balance,deposit,place,withdrawal;
-    private Date times;
 
-    public Long getId(Long id) {return id;
+
+    private long id;
+    private int deposit;
+    private int withdrawal;
+    private Date times;
+    private int balance;
+    private String category; // 카테고리 이름 추가
+
+    // 생성자, getter 및 setter
+    public long getId() {
+        return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
-    public int getDeposit() {
-        return deposit;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDeposit(int deposit) {
-        this.deposit = deposit;
+    public String getCategory_id() {
+        return category;
+    }
+
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public Date getTimes() {
+        return times;
+    }
+
+    public void setTimes(Date times) {
+        this.times = times;
     }
 
     public int getWithdrawal() {
@@ -33,46 +58,22 @@ public class AccountDto {
         this.withdrawal = withdrawal;
     }
 
-
-    public int getPlace() {
-        return place;
+    public int getDeposit() {
+        return deposit;
     }
 
-    public void setPlace(int place) {
-        this.place = place;
-    }
-
-
-    public Date getTimes() {
-        return times;
-    }
-
-    public void setTimes(Date times) {
-        this.times = times;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-
-    // 생성자
-    public AccountDto(Long id, int deposit, int withdrawal, int place, Date times, int balance) {
-        this.id = id;
+    public void setDeposit(int deposit) {
         this.deposit = deposit;
-        this.withdrawal = withdrawal;
-        this.place = place;
-        this.times = times;
-        this.balance = balance;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public AccountDto() {
 
     }
+
 
     public LocalDate toLocalDate() {
         // articleRegdate 필드의 값을 LocalDate로 변환하는 로직을 구현합니다.

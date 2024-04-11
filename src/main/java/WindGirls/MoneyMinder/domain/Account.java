@@ -1,18 +1,14 @@
 package WindGirls.MoneyMinder.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+        import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "account")
 public class Account {
 
     @Id
@@ -28,21 +24,31 @@ public class Account {
     @Column(name = "deposit", nullable = false)
     private int deposit;
 
+
     @Column(name = "withdrawal", nullable = false)
     private int withdrawal;
 
-
-    @Column(name = "place", nullable = false)
-    private int place;
-
     @Column(name = "times", nullable = false)
     private Date times;
-
 
     @Column(name = "balance", nullable = false)
     private int balance;
 
 
+    public Category getCategory() {
+        return category;
+    }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category; //카테고리 번호
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

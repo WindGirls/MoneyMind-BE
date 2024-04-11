@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*") // 프론트엔드 도메인으로 수정
+@CrossOrigin(origins = "http://localhost:3000") // 프론트엔드 도메인으로 수정
 @RestController
 @RequestMapping("/api/account")
 public class ExpenseController {
@@ -30,16 +28,35 @@ public class ExpenseController {
         this.accountRepository = accountRepository;
     }
 
+    @GetMapping(value="/test" ,produces = "text/plain; charset=UTF-8")
+    public String time()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return "안녕하세요. 현재 서버의 시간은 " +sdf.format(new Date()) + " 입니다!";    }
+
     @GetMapping("/user/{user_id}")
     public List<Account> getAccountsByUserId(@PathVariable Long user_id) {
         System.out.println("컨트롤러 ---------------");
         return accountService.getAccountsByUserId(user_id);
     }
 
-    //    @PostMapping("/addExpense")
-//    public void addExpense() {
-//        accountService.addExpense();
+//    @GetMapping("/asset/{transaction_id}")
+//    public List<Account> getAccountsByTransactionId(@PathVariable Long transaction_id) {
+//        System.out.println("컨트롤러 ---------------");
+//        return accountService.getAccountsByTransactionId(transaction_id);
 //    }
+
+        @PostMapping("/addExpense")
+    public void addExpense() {
+        accountService.addExpense();
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String hello() {
+        System.out.println("HelloController hello() " + new Date());
+
+        return "hello"; // ajax를 통해 값을 front-end로 보내준다.
+    }
     @GetMapping("/{date}/{userId}")
     public List<AccountDto> getAccountStatusByDateAndUser(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
                                                           @PathVariable Long userId) {

@@ -43,42 +43,41 @@ public class AccountService {
     }
 
     public List<Account> getAccountsByUserId(Long user_id) {
-        System.out.println("서비스 ---------------");
+        System.out.println("서비스 ---------------"+accountRepository.findByUserId(user_id));
         return accountRepository.findByUserId(user_id);
     }
+//    public List<Account> getAccountsByTransactionId(Long transaction_id) {
+//        System.out.println("서비스 ---------------"+accountRepository.findById(transaction_id));
+//        return accountRepository.findById(transaction_id);
+//    }
 
     public List<AccountDto> getAccountStatusByDateAndUser(Date date, Long userId) {
         try {
-            // Repository에서 날짜와 유저에 해당하는 데이터를 가져옴
             List<Account> accounts = accountRepository.findAllByTimesAndUserId(date, userId);
-            System.out.println("서비스"+accounts);
-
-            // 가져온 데이터를 AccountDto로 변환
             return accounts.stream()
                     .map(this::convertToAccountDto)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
-            throw e; // 예외를 다시 던져서 외부로 전파
+            throw e;
         }
     }
 
-
-    private List<AccountDto> convertToAccountDtoList(List<Account> accounts) {
-        return accounts.stream()
-                .map(this::convertToAccountDto)
-                .collect(Collectors.toList());
-    }
 
     private AccountDto convertToAccountDto(Account account) {
         AccountDto accountDto = new AccountDto();
         accountDto.setId(account.getId());
         accountDto.setDeposit(account.getDeposit());
         accountDto.setWithdrawal(account.getWithdrawal());
-        accountDto.setPlace(account.getPlace());
+        accountDto.setCategory(account.getCategory().getName());
         accountDto.setTimes(account.getTimes());
         accountDto.setBalance(account.getBalance());
 
         return accountDto;
     }
+
+
+    public void addExpense() {
+
     }
+}

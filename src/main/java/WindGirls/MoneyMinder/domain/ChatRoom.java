@@ -1,6 +1,8 @@
 package WindGirls.MoneyMinder.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,30 +11,32 @@ import java.util.List;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "chat_room")
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatroom_id")
+    @Column(name = "chat_room_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user1_id", referencedColumnName = "user_id", insertable = false, updatable = false)
-    private User user1;
+    @JoinColumn(name = "sender_id", referencedColumnName = "user_id",insertable = false, updatable = false)
+    private User sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user2_id", referencedColumnName = "user_id", insertable = false, updatable = false)
-    private User user2;
+    @JoinColumn(name = "receiver_id", referencedColumnName = "user_id",insertable = false, updatable = false)
+    private User receiver;
 
     @OneToMany(mappedBy = "chat_Room")
     private List<Message> messages = new ArrayList<>();
 
-    public void setUser1(User user1) {
-        this.user1 = user1;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public void setUser2(User user2) {
-        this.user2 = user2;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 }
