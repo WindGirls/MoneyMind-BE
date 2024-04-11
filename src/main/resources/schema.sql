@@ -6,6 +6,7 @@ drop table if exists chat_room;
 drop table if exists chatroom;
 drop table if exists financial_terms;
 drop table if exists memo;
+drop table if exists chat_bot_message;
 drop table if exists authority;
 drop table if exists user;
 
@@ -65,13 +66,6 @@ CREATE TABLE account (
                          FOREIGN KEY(category_id) REFERENCES category(category_id)
 );
 
-CREATE TABLE chat_bot_message (
-                                  id INT AUTO_INCREMENT PRIMARY KEY,
-                                  content VARCHAR(255) NOT NULL,
-                                  user_id BIGINT NOT NULL,
-                                  c_times TIMESTAMP DEFAULT NULL,
-                                  FOREIGN KEY (user_id) REFERENCES user(user_id)
-);
 
 CREATE TABLE financial_terms (
     term_id bigINT AUTO_INCREMENT PRIMARY KEY,
