@@ -3,8 +3,11 @@ drop table if exists category;
 drop table if exists message;
 drop table if exists chat_room;
 drop table if exists chatroom;
+drop table if exists financial_terms;
+drop table if exists memo;
 drop table if exists authority;
 drop table if exists user;
+
 
 CREATE TABLE user (
 	user_id	bigint(20)  auto_increment primary key,
@@ -59,3 +62,26 @@ CREATE TABLE account (
                          FOREIGN KEY (user_id) REFERENCES user(user_id),
                          FOREIGN KEY(category_id) REFERENCES category(category_id)
 );
+
+
+CREATE TABLE financial_terms (
+    term_id bigINT AUTO_INCREMENT PRIMARY KEY,
+    term VARCHAR(255) NOT NULL,
+    definition VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE memo (
+    memo_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    content VARCHAR(255) not null,
+    created_at timestamp NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+);
+
+
+
+
+
+
+
+
